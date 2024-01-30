@@ -1,8 +1,8 @@
+"use client"
 import { z } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
-import { AuthError } from "@supabase/supabase-js";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -97,6 +97,7 @@ export default function Register() {
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (
     values: z.infer<typeof formSchema>
   ) => {
+    "use server"
     const {
       email,
       password,
@@ -105,26 +106,26 @@ export default function Register() {
       baseLanguage,
       targetLanguage,
     } = values;
-    try {
-      const response = await registerNewUser(
-        email,
-        password,
-        firstName,
-        lastName,
-        baseLanguage,
-        targetLanguage
-      );
-      const error = response?.error as AuthError | null;
-      const profileError = response?.profileError as AuthError | null;
-      if (error || profileError) {
-        console.error(error, profileError);
-        return;
-      }
-      navigate("/");
-      // TODO:  Change login state globally or handle session somehow
-    } catch (err) {
-      console.error(err);
-    }
+    // try {
+    //   const response = await registerNewUser(
+    //     email,
+    //     password,
+    //     firstName,
+    //     lastName,
+    //     baseLanguage,
+    //     targetLanguage
+    //   );
+    //   const error = response?.error as AuthError | null;
+    //   const profileError = response?.profileError as AuthError | null;
+    //   if (error || profileError) {
+    //     console.error(error, profileError);
+    //     return;
+    //   }
+    //   navigate("/");
+    //   // TODO:  Change login state globally or handle session somehow
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
   return (

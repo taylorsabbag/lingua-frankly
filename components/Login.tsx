@@ -1,3 +1,4 @@
+"use client"
 import { z } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -41,19 +42,19 @@ export default function Login() {
 	const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (
 		values: z.infer<typeof formSchema>,
 	) => {
-		try {
-			const { email, password } = values;
-			const response = await authenticateUserByPassword(email, password);
-			const error = response?.error as AuthError | null;
-			if (error) {
-				console.log(error);
-				return;
-			}
-			navigate("/");
-			// TODO:  Change login state globally or handle session somehow
-		} catch (err) {
-			console.error(err);
-		}
+		// try {
+		// 	const { email, password } = values;
+		// 	const response = await authenticateUserByPassword(email, password);
+		// 	const error = response?.error as AuthError | null;
+		// 	if (error) {
+		// 		console.log(error);
+		// 		return;
+		// 	}
+		// 	navigate("/");
+		// 	// TODO:  Change login state globally or handle session somehow
+		// } catch (err) {
+		// 	console.error(err);
+		// }
 	};
 
 	return (
