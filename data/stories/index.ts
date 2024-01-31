@@ -1,5 +1,4 @@
 import { UUID } from "crypto";
-import { supabase } from "../supabaseClient";
 
 type Story = {
     title: string;

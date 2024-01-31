@@ -35,6 +35,19 @@ export async function login(formData: FormData) {
 	redirect("/");
 }
 
+export async function logout() {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    redirect("/error");
+  }
+
+  revalidatePath("/", "layout");
+  redirect("/");
+}
+
 export async function signup(formData: FormData) {
   const languages = [
     "English",
@@ -87,13 +100,17 @@ export async function signup(formData: FormData) {
 
   const result = formDataSchema.safeParse(formData)
 	if (!result.success) {
-    console.error()
+    console.error(result.error)
     return
   }
 
   const data = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
+    firstName: formData.get("firstName") as string,
+    lastName: formData.get("lastName") as string,
+    baseLanguage: formData.get("baseLanguage") as string,
+    targetLanguage: formData.get("targetLanguage") as string,
   };
 	const { error } = await supabase.auth.signUp(data);
 

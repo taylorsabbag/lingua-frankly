@@ -76,6 +76,7 @@ export default function Register() {
                 placeholder="johnsmith@gmail.com"
                 required
               />
+              <input type="text" name="test" />
             </div>
             <div>
               <Label htmlFor="password">
