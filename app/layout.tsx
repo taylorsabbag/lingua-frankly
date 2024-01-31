@@ -3,6 +3,9 @@ import { Inter as FontSans } from "next/font/google";
 import "@/styles/reset.css";
 import "@/styles/globals.css";
 
+import Header from "@/components/Header";
+import Footer from "@/components/Footer"
+
 import { cn } from "@/lib/utils";
 
 export const fontSans = FontSans({
@@ -28,7 +31,9 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
