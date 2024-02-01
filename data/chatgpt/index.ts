@@ -1,8 +1,8 @@
 import OpenAI from "openai";
 
-const openai = new OpenAI({ apiKey: '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' });
+const openai = new OpenAI({ apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY });
 
-async function getShortStory() {
+export default async function getShortStory() {
 	const completion = await openai.chat.completions.create({
 		model: "gpt-3.5-turbo",
 		messages: [

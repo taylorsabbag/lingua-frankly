@@ -43,7 +43,6 @@ export default function Header() {
 				<Button
 					type={undefined}
 					formAction={logout}
-					className={buttonVariants({ variant: "outline" })}
 				>
 					Log Out
 				</Button>

@@ -75,8 +75,8 @@ export default function Register() {
                 name="email"
                 placeholder="johnsmith@gmail.com"
                 required
+                value="test@test.com"
               />
-              <input type="text" name="test" />
             </div>
             <div>
               <Label htmlFor="password">
@@ -88,6 +88,7 @@ export default function Register() {
                 required
                 min={6}
                 max={72}
+                value="testtest"
               />
             </div>
             <div>
@@ -100,22 +101,23 @@ export default function Register() {
                 required
                 min={6}
                 max={72}
+                value="testtest"
               />
             </div>
             <div>
               <Label htmlFor="firstName">First Name</Label>
-              <Input type="text" name="firstName" placeholder="John" />
+              <Input type="text" name="firstName" placeholder="John" value="John" />
             </div>
             <div>
               <Label htmlFor="lastName">Last Name</Label>
-              <Input type="text" name="lastName" placeholder="Smith" />
+              <Input type="text" name="lastName" placeholder="Smith" value="Smith" />
             </div>
             <div>
               <Label htmlFor="baseLanguage">
                 Native Language (Mother Tongue){" "}
                 <span className="text-red-500">*</span>
               </Label>
-              <Select required>
+              <Select required defaultValue="English" name="baseLanguage">
                 <SelectTrigger>
                   <SelectValue placeholder="Select a language" />
                 </SelectTrigger>
@@ -135,7 +137,7 @@ export default function Register() {
               <Label htmlFor="baseLanguage">
                 Target Language <span className="text-red-500">*</span>
               </Label>
-              <Select required>
+              <Select required defaultValue="English" name="targetLanguage">
                 <SelectTrigger>
                   <SelectValue placeholder="Select a language" />
                 </SelectTrigger>

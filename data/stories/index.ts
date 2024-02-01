@@ -1,11 +1,18 @@
+"use server"
+
+import { createClient } from "@/utils/supabase/actions";
+import { cookies } from "next/headers";
 import { UUID } from "crypto";
+import getShortStory from "@/data/chatgpt";
+import getTranslation from "@/data/deepL";
 
 type Story = {
-    title: string;
-    content: string;
     language: string;
     userId: UUID;
 }
+
+const cookiesStore = cookies();
+const supabase = createClient(cookiesStore)
 
 async function getAllStoriesByUserId(userId: string) {
 	try {
@@ -32,13 +39,15 @@ async function getStoryById(storyId: string) {
 	}
 }
 
-async function addStory(story: Story) {
-    const { title, content, language, userId } = story;
+async function createStory(storyRequest: Story) {
+    const { language, userId, ...storyParams } = storyRequest;
     try {
+        const story = await getShortStory()
+        const translatedStory = await getTranslation(story as string, language)
+
         const {data, error} = await supabase.from("stories").insert([
             {
-                title,
-                content,
+                content: translatedStory,
                 language,
                 user_id: userId,
             }
@@ -49,12 +58,4 @@ async function addStory(story: Story) {
     }
 }
 
-async function addStoryToUser(userId: string, storyId: string) {
-    try {
-        const {data, error} = await supabase.from("users").insert([
-
-        ])
-    }
-}
-
-export { getAllStoriesByUserId, getStoryById };
+export { getAllStoriesByUserId, getStoryById, createStory };
