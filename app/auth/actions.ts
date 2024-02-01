@@ -7,6 +7,14 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/actions";
 
+export async function isUserLoggedIn() {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  const { data: { user }} = await supabase.auth.getUser()
+  return user
+}
+
 export async function login(formData: FormData) {
 	const formDataSchema = z.object({
 		email: z.string().email(),
@@ -40,7 +48,8 @@ export async function logout() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const { error } = await supabase.auth.signOut();
-
+  console.log('signing out user')
+  console.log(error)
   if (error) {
     redirect("/error");
   }
@@ -102,6 +111,7 @@ export async function signup(formData: FormData) {
   const data = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
+    confirmPassword: formData.get("confirmPassword") as string,
     firstName: formData.get("firstName") as string,
     lastName: formData.get("lastName") as string,
     baseLanguage: formData.get("baseLanguage") as string,
@@ -114,7 +124,8 @@ export async function signup(formData: FormData) {
     return
   }
 
-	const { error } = await supabase.auth.signUp(data);
+	const { data: userData, error } = await supabase.auth.signUp(data);
+  console.log(error, userData, data, formData)
 
 	if (error) {
 		redirect("/error");

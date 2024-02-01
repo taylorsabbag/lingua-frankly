@@ -53,13 +53,12 @@ export default async function getTranslation(
 			},
 			method: "POST",
 			body: JSON.stringify({
-				text: text,
+				text: [text],
 				target_lang: deepLTargetLangAbbreviation,
 			}),
 		});
 		const json = await response.json();
-
-		return json.data.text;
+		return json.translations[0].text;
 	} catch (error) {
 		console.error(error);
 	}

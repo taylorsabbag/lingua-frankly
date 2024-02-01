@@ -75,7 +75,7 @@ export default function Register() {
                 name="email"
                 placeholder="johnsmith@gmail.com"
                 required
-                value="test@test.com"
+                value="test@tester.com"
               />
             </div>
             <div>

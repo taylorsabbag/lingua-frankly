@@ -6,9 +6,10 @@ import { UUID } from "crypto";
 import getShortStory from "@/data/chatgpt";
 import getTranslation from "@/data/deepL";
 
-type Story = {
+export type StoryRequest = {
     language: string;
     userId: UUID;
+	storyParams: any | null;
 }
 
 const cookiesStore = cookies();
@@ -39,19 +40,19 @@ async function getStoryById(storyId: string) {
 	}
 }
 
-async function createStory(storyRequest: Story) {
+async function createStory(storyRequest: StoryRequest) {
     const { language, userId, ...storyParams } = storyRequest;
     try {
         const story = await getShortStory()
         const translatedStory = await getTranslation(story as string, language)
 
-        const {data, error} = await supabase.from("stories").insert([
+        const {data, error} = await supabase.from("stories").insert(
             {
                 content: translatedStory,
                 language,
                 user_id: userId,
             }
-        ])
+        )
         return {data, error};
     } catch (err) {
         console.error(err);

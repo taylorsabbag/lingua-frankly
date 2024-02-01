@@ -1,4 +1,10 @@
-import { supabase } from "../supabaseClient";
+"use server"
+
+import { createClient } from "@/utils/supabase/actions";
+import { cookies } from "next/headers";
+
+const cookiesStore = cookies();
+const supabase = createClient(cookiesStore)
 
 async function getUserByEmail(email: string) {
 	try {

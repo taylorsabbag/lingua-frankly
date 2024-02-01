@@ -1,11 +1,9 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function AuthLayout({
-	children,
 	login,
 	register,
 }: {
-	children: React.ReactNode;
 	login: React.ReactNode;
 	register: React.ReactNode;
 }) {
@@ -20,7 +18,6 @@ export default function AuthLayout({
 						Register
 					</TabsTrigger>
 				</TabsList>
-				{children}
 				{login}
 				{register}
 			</Tabs>

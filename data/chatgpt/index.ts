@@ -9,7 +9,7 @@ export default async function getShortStory() {
 			{ role: "system", content: "You are a storyteller." },
 			{
 				role: "user",
-				content: "Create a short story in English in less than 1000 words.",
+				content: "Tell me a single joke about cats in 25 words or less.",
 			},
 		],
 		temperature: 0.9,
