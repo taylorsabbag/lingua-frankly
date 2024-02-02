@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Inter as FontSans, Fraunces as FontSerif } from "next/font/google";
 import "@/styles/reset.css";
 import "@/styles/globals.css";
 
@@ -11,6 +11,11 @@ import { cn } from "@/lib/utils";
 export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+export const fontSerif = FontSerif({
+  subsets: ["latin"],
+  variable: "--font-serif",
 });
 
 export const metadata: Metadata = {

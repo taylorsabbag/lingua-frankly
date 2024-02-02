@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -9,63 +9,74 @@
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
- 
+
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
- 
+
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
- 
+
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
- 
+
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
- 
+
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
- 
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
- 
+
     --radius: 0.5rem;
+
+    /* Fluid font size scale */
+    /* @link https://utopia.fyi/type/calculator?c=320,16,1.2,1240,20,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+    --step--2: clamp(0.6944rem, 0.6913rem + 0.0157vi, 0.7035rem);
+    --step--1: clamp(0.8333rem, 0.797rem + 0.1816vi, 0.9377rem);
+    --step-0: clamp(1rem, 0.913rem + 0.4348vi, 1.25rem);
+    --step-1: clamp(1.2rem, 1.0378rem + 0.8109vi, 1.6663rem);
+    --step-2: clamp(1.44rem, 1.1683rem + 1.3585vi, 2.2211rem);
+    --step-3: clamp(1.728rem, 1.2992rem + 2.1439vi, 2.9607rem);
+    --step-4: clamp(2.0736rem, 1.4221rem + 3.2575vi, 3.9467rem);
+    --step-5: clamp(2.4883rem, 1.5239rem + 4.8219vi, 5.2609rem);
   }
- 
+
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
- 
+
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
- 
+
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
- 
+
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
- 
+
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
- 
+
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
- 
+
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
- 
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
- 
+
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
@@ -73,4 +84,48 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+body {
+  font-size: var(--step-1);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply font-serif;
+  max-width: 20ch;
+  @apply font-semibold;
+}
+
+h1 {
+  font-size: var(--step-5);
+}
+
+h2 {
+  font-size: var(--step-4);
+}
+
+h3 {
+  font-size: var(--step-3);
+}
+
+h4 {
+  font-size: var(--step-2);
+}
+
+p,
+li,
+blockquote:not([class]) {
+  width: clamp(45ch, 50%, 75ch);
+}
+
+.logo {
+  width: var(--step-2);
+  height: var(--step-2);
+}
+
+a {
+  @apply text-base;
 }

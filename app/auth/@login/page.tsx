@@ -18,7 +18,7 @@ export default function Login() {
     <TabsContent value="login">
       <Card className={cn("w-[380px]")}>
         <CardHeader>
-          <CardTitle>Login</CardTitle>
+          <CardTitle className="text-xl">Login</CardTitle>
           <CardDescription>Get your stories!</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
