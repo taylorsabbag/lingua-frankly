@@ -17,7 +17,6 @@ export default function Header() {
 		const getIsUserLoggedIn = async () => {
 			const supabase = createClient();
 			const subscription = supabase.auth.onAuthStateChange((event, session) => {
-				console.log(event, session);
 				if (event === "SIGNED_IN") {
 					setIsLoggedIn(() => true);
 				} else if (event === "SIGNED_OUT") {
@@ -27,6 +26,8 @@ export default function Header() {
 			const user = await isUserLoggedIn(); // Don't hate me Andrew. I created this first, then realized it didn't return a boolean. Too much work to fix.
 			if (user) {
 				setIsLoggedIn(() => true);
+			} else {
+				setIsLoggedIn(() => false);
 			}
 		};
 
@@ -34,10 +35,10 @@ export default function Header() {
 	}, []);
 
 	return (
-		<header className="flex w-full justify-between items-center py-4 px-4 mb-4 bg-blue-950 text-white">
+		<header className="flex w-full justify-around sm:justify-between items-center py-4 px-4 mb-4 bg-blue-950 text-white">
 			<Link href="/" className="flex gap-2">
 				<Image src={logo} alt="" className="logo" />
-				<h4>LinguaFrankly</h4>
+				<h4 className="hidden sm:block">LinguaFrankly</h4>
 			</Link>
 			<div className="flex items-center gap-6">
 				{isLoggedIn && (

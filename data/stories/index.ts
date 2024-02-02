@@ -3,19 +3,18 @@
 import { createClient } from "@/utils/supabase/actions";
 import { cookies } from "next/headers";
 import { UUID } from "crypto";
-import getShortStory from "@/data/chatgpt";
+import getShortStory, { StoryPromptOptions } from "@/data/chatgpt";
 import getTranslation from "@/data/deepL";
 
 export type StoryRequest = {
     language: string;
     userId: UUID;
-	storyParams: any | null;
+	storyPromptOptions: StoryPromptOptions;
 }
 
-const cookiesStore = cookies();
-const supabase = createClient(cookiesStore)
-
 async function getAllStoriesByUserId(userId: string) {
+	const cookiesStore = cookies();
+	const supabase = createClient(cookiesStore)
 	try {
 		const { data, error } = await supabase
 			.from("stories")
@@ -28,6 +27,8 @@ async function getAllStoriesByUserId(userId: string) {
 }
 
 async function getStoryById(storyId: string) {
+	const cookiesStore = cookies();
+	const supabase = createClient(cookiesStore)
 	try {
 		const { data, error } = await supabase
 			.from("stories")
@@ -41,13 +42,18 @@ async function getStoryById(storyId: string) {
 }
 
 async function createStory(storyRequest: StoryRequest) {
-    const { language, userId, ...storyParams } = storyRequest;
+	const cookiesStore = cookies();
+	const supabase = createClient(cookiesStore)
+    
+	const { language, userId, storyPromptOptions }: StoryRequest = storyRequest;
     try {
-        const story = await getShortStory()
-        const translatedStory = await getTranslation(story as string, language)
+        const { title, content } = await getShortStory(storyPromptOptions);
+        const translatedStory = await getTranslation(content, language)
+		const translatedTitle = await getTranslation(title, language)
 
         const {data, error} = await supabase.from("stories").insert(
             {
+				title: translatedTitle,
                 content: translatedStory,
                 language,
                 user_id: userId,

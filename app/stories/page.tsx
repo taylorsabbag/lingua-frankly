@@ -1,4 +1,4 @@
-import StoriesList from "./storiesList";
+import StoriesList from "./storyList";
 import { createStory, getAllStoriesByUserId } from "@/data/stories"
 import { isUserLoggedIn } from "@/app/auth/actions";
 import { redirect } from "next/navigation";

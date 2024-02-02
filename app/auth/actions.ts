@@ -48,7 +48,6 @@ export async function logout() {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const { error } = await supabase.auth.signOut();
-  console.log('signing out user')
   console.log(error)
   if (error) {
     redirect("/error");
