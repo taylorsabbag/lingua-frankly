@@ -90,7 +90,7 @@ body {
   font-size: var(--step-1);
 }
 
-main {
+.main-container {
   width: min(85ch, 100% - 4rem);
   margin-inline: auto;
 }
@@ -123,7 +123,7 @@ h4 {
 p,
 li,
 blockquote:not([class]) {
-  width: clamp(45ch, 50%, 75ch);
+  width: clamp(20ch, 75%, 75ch);
 }
 
 .logo {
@@ -133,4 +133,25 @@ blockquote:not([class]) {
 
 a {
   @apply text-base;
+}
+
+.hero-wrapper {
+  height: 400px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-image: url('../assets/background.jpg');
+}
+
+.hero-box {
+  height: 400px;
+  position: absolute;
+  width: 100%;
+  backdrop-filter: blur(60px);
+}
+
+.hero-box > h2 {
+  color: white;
+  -webkit-text-stroke: 1px rgb(22 37 64 / 0.2);
+  margin-bottom: 2rem;
 }
