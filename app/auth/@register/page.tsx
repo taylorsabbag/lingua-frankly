@@ -3,11 +3,11 @@ import { signup } from "../actions";
 
 import { Button } from "@/components/ui/button";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
 	Card,
 	CardContent,
@@ -116,11 +116,7 @@ export default function Register() {
 						</div>
 						<div>
 							<Label htmlFor="lastName">Last Name</Label>
-							<Input
-								type="text"
-								name="lastName"
-								placeholder="Smith"
-							/>
+							<Input type="text" name="lastName" placeholder="Smith" />
 						</div>
 						<div>
 							<Label htmlFor="baseLanguage">
@@ -163,22 +159,34 @@ export default function Register() {
 								</SelectContent>
 							</Select>
 						</div>
-            <div className="flex items-center space-x-2">
-              <Checkbox name="autoGenerate" id="autoGenerate" />
-              <Label htmlFor="autoGenerate">
-                I want my stories to be automatically generated.
-              <TooltipProvider>
-                <Tooltip className="self-end">
-                  <TooltipContent>
-                    <p className='text-xs'>If this is checked, your stories will be automatically generated. This can be changed later in your profile settings.</p>
-                  </TooltipContent>
-                  <TooltipTrigger>
-                    <Label className="border rounded-full bg-blue-950 text-white shadow-sm">?</Label>
-                  </TooltipTrigger>
-                </Tooltip>
-              </TooltipProvider>
-              </Label>
-            </div>
+						<div>
+							<Label htmlFor="genres">
+								Genres
+							</Label>
+							
+						</div>
+						<div className="flex items-center space-x-2">
+							<Checkbox name="autoGenerate" id="autoGenerate" />
+							<Label htmlFor="autoGenerate">
+								I want my stories to be automatically generated.
+								<TooltipProvider>
+									<Tooltip className="self-end">
+										<TooltipContent>
+											<p className="text-xs">
+												If this is checked, your stories will be automatically
+												generated. This can be changed later in your profile
+												settings.
+											</p>
+										</TooltipContent>
+										<TooltipTrigger>
+											<Label className="border rounded-full bg-blue-950 text-white shadow-sm">
+												?
+											</Label>
+										</TooltipTrigger>
+									</Tooltip>
+								</TooltipProvider>
+							</Label>
+						</div>
 						<Button form="registerForm" className="w-full" type="submit">
 							Register
 						</Button>

@@ -10,12 +10,14 @@ export type StoryPromptOptions = {
 	people?: string[];
 	pets?: string[];
 	premise?: string;
+	setting?: string;
 };
 
 export default async function getShortStory(
 	storyPromptOptions: StoryPromptOptions,
 ) {
-	const { learnerLevel, genres, people, pets, premise } = storyPromptOptions;
+	const { learnerLevel, genres, people, pets, premise, setting } =
+		storyPromptOptions;
 	try {
 		const completion = await openai.chat.completions.create({
 			model: "gpt-3.5-turbo",
@@ -27,21 +29,22 @@ export default async function getShortStory(
 				},
 				{
 					role: "user",
-					content: `Create a single short story in English for a CEFR level ${learnerLevel} learner. Produce a short (10 words or less) title for the short story and present it in the same line as the first paragraph placing a single '>' after the title. Include the following themes, genres, people names, pet names, and premise, respectively: ${genres?.join(
+					content: `Create a single short story in English for a CEFR level ${learnerLevel} learner. Produce a short (10 words or less) title for the short story and present it in the same line as the first paragraph placing a single '>' after the title. Also, provide a set of 3 keywords that represent the story and add them to the end of the final paragraph placing a single '>' between the end of the story and the keywords, which should be separated by ','. Include the following themes, genres, people names, pet names, premise, and setting, respectively: ${genres?.join(
 						", ",
 					)}; ${people?.join(", ")}; ${pets?.join(
 						", ",
-					)}; ${premise}. If any of the preceding options are not provided, you may choose any genres, names, and premise. The short story may not exceed 800 words.`,
+					)}; ${premise}; ${setting}. If any of the preceding options are not provided, you may choose any genres, names, premise, and setting. The short story may not exceed 800 words.`,
 				},
 			],
 			temperature: 0.9,
 			max_tokens: 800,
 		});
 		const story = completion?.choices[0]?.message?.content;
-		const [title, content] = story.split(">");
+		const [title, content, keywords] = story.split(">");
 		return {
 			title,
 			content,
+			keywords
 		};
 	} catch (error) {
 		console.error("Error requesting story from OpenAI:", error);
