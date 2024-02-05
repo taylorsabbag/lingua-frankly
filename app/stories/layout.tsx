@@ -7,7 +7,7 @@ export default async function Layout({
     children: React.ReactNode;
   }>) {
     return (
-        <main>
+        <main className="main-container">
           <section className="py-10 px-4">
             <Link href="/stories" className="w-fit block"><h1 className="ml-2 mb-4 w-fit">Stories</h1></Link>
             {children}
