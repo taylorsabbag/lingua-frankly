@@ -12,7 +12,7 @@ import Image from "next/image";
 
 import supabaseIcon from "@/assets/supabase-logo-icon.png";
 import tailwindIcon from "@/assets/tailwindcss-icon.svg";
-import openAIIcon from "@/assets/openai-logomark.svg"
+import openAIIcon from "@/assets/openai-logomark.svg";
 
 export default function Home() {
 	return (
@@ -48,7 +48,7 @@ export default function Home() {
 								<div className="grid grid-cols-2 gap-6">
 									<Card className="col-span-2">
 										<CardHeader className="flex flex-row items-center gap-2">
-											<DownloadIcon className="size-10 align-baseline" />
+											<DownloadIcon className="size-10 align-baseline hidden sm:block" />
 											<h4 className="font-medium text-gray-900">
 												Optimal Input
 											</h4>
@@ -62,7 +62,7 @@ export default function Home() {
 									</Card>
 									<Card>
 										<CardHeader className="flex flex-row items-center gap-2">
-											<CopyIcon className="size-10 align-baseline" />
+											<CopyIcon className="size-10 align-baseline hidden sm:block" />
 											<h4 className=" font-medium text-gray-900">
 												Acquisition-Learning
 											</h4>
@@ -76,7 +76,7 @@ export default function Home() {
 									</Card>
 									<Card>
 										<CardHeader className="flex flex-row items-center gap-2">
-											<EyeNoneIcon className="size-10 align-baseline" />
+											<EyeNoneIcon className="size-10 align-baseline hidden sm:block" />
 											<h4 className="font-medium text-gray-900">Monitor</h4>
 										</CardHeader>
 										<CardContent>
@@ -87,7 +87,7 @@ export default function Home() {
 									</Card>
 									<Card>
 										<CardHeader className="flex flex-row items-center gap-2">
-											<TextAlignBottomIcon className="size-10 align-baseline" />
+											<TextAlignBottomIcon className="size-10 align-baseline hidden sm:block" />
 											<h4 className="font-medium text-gray-900">
 												Natural Order
 											</h4>
@@ -100,7 +100,7 @@ export default function Home() {
 									</Card>
 									<Card>
 										<CardHeader className="flex flex-row items-center gap-2">
-											<HeartIcon className="size-10 align-baseline" />
+											<HeartIcon className="size-10 align-baseline hidden sm:block" />
 											<h4 className="font-medium text-gray-900">
 												Affective Filter
 											</h4>
@@ -126,9 +126,22 @@ export default function Home() {
 							language. Our app provides thousands of such stories to help you
 							immerse yourself in the language.
 						</p>
-						<div className="mt-8 bg-white p-6 rounded-lg shadow">
-							<p className="text-lg text-gray-600">
-								[Short story in target language goes here]
+						<div className="mt-8 bg-white p-6 rounded-lg shadow space-y-6">
+							<h3 className="text-xl">Een dag in het park</h3>
+							<span className="text-base text-gray-600">Dutch</span>
+							<p className="text-base text-gray-600">
+								Abigail en John gingen op avontuur naar het park in Nederland
+								met hun huisdieren Theo en Kaileigh. De zon scheen en de vogels
+								zongen terwijl ze langs de kleurrijke tulpenvelden liepen.
+								Plotseling joeg Theo, de avontuurlijke kat, een vlinder een boom
+								in. Kaileigh, de speelse hond, blafte opgewonden en wilde
+								meedoen. Abigail en John lachten en probeerden Theo over te
+								halen om weer naar beneden te komen. Na een tijdje besloot Theo
+								eindelijk terug te komen, tot grote opluchting van iedereen. Ze
+								vervolgden hun wandeling en genoten van de prachtige bloemen en
+								de frisse lucht. Naarmate de dag vorderde, picknickten ze bij
+								een windmolen en deelden broodjes en verhalen. Het was een
+								perfecte dag in het park, gevuld met gelach en vreugde.
 							</p>
 						</div>
 					</div>
@@ -206,18 +219,25 @@ export default function Home() {
 										src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/2048px-Typescript_logo_2020.svg.png"
 										alt="TypeScript icon"
 									/>
-									<p className='w-auto text-center'>TypeScript</p>
+									<p className="w-auto text-center">TypeScript</p>
 								</div>
 								<div className="flex flex-col gap-2 items-center justify-between">
 									<Image src={supabaseIcon} alt="Supabase icon" />
 									<p className="w-auto text-center">Supabase</p>
 								</div>
 								<div className="flex flex-col gap-2 items-center justify-center">
-									<img src="https://avatars.githubusercontent.com/u/139895814?s=280&v=4" alt="shadcn/UI icon" />
+									<img
+										src="https://avatars.githubusercontent.com/u/139895814?s=280&v=4"
+										alt="shadcn/UI icon"
+									/>
 									<p className="w-auto text-center">shadcn/UI</p>
 								</div>
 								<div className="flex flex-col gap-2 items-center justify-between icon">
-									<Image src={tailwindIcon} alt="Tailwind CSS icon" className="my-auto w-auto" />
+									<Image
+										src={tailwindIcon}
+										alt="Tailwind CSS icon"
+										className="my-auto w-auto"
+									/>
 									<p className="w-auto text-center">Tailwind CSS</p>
 								</div>
 								<div className="flex flex-col gap-2 items-center justify-between">
@@ -225,7 +245,10 @@ export default function Home() {
 									<p className="w-auto text-center">OpenAI</p>
 								</div>
 								<div className="flex flex-col gap-2 items-center justify-between">
-									<img src="https://play-lh.googleusercontent.com/0IH4L3pX-jqQXKYCDmxTM5t3Tvak2cb_zUuIs9nKCHPeOqkaRJ_bRTq1qKawsSvunw" alt="DeepL icon" />
+									<img
+										src="https://play-lh.googleusercontent.com/0IH4L3pX-jqQXKYCDmxTM5t3Tvak2cb_zUuIs9nKCHPeOqkaRJ_bRTq1qKawsSvunw"
+										alt="DeepL icon"
+									/>
 									<p className="w-auto text-center">DeepL</p>
 								</div>
 							</div>
