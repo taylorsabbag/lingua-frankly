@@ -19,7 +19,7 @@ export default function Story({ id, content, language, title, keywords }) {
 				</CardHeader>
 				<CardContent className="line-clamp-3 py-0">{content}</CardContent>
 				<CardFooter className="my-6 pb-0">
-					<div className="text-sm flex flex-wrap flex-col gap-2 sm:flex-row items-start">
+					<div className="text-sm flex gap-2 flex-wrap flex-col sm:flex-row items-start">
 						<span className="italic">Keywords: </span>
 						{keywords
 							.substring(1, keywords.length - 1)

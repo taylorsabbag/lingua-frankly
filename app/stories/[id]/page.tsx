@@ -28,19 +28,23 @@ export default async function StoryPage({
 				<CardDescription>{story.language}</CardDescription>
 			</CardHeader>
 			<CardContent>{story.content}</CardContent>
-<CardFooter>
-    <div className="text-sm flex gap-2">
-        <span className="italic">Keywords: </span>
-        {story.keywords
-            .substring(1, story.keywords.length - 1)
-            .split(",")
-            .map((str: string, i: number) => (
-                <Badge key={`${str}-${i}`} variant="outline" className="hover:text-white hover:bg-black">
-                    {str.substring(1, str.length - 1)}
-                </Badge>
-            ))}
-    </div>
-</CardFooter>
+			<CardFooter>
+				<div className="text-sm flex gap-2 flex-wrap flex-col sm:flex-row items-start">
+					<span className="italic">Keywords: </span>
+					{story.keywords
+						.substring(1, story.keywords.length - 1)
+						.split(",")
+						.map((str: string, i: number) => (
+							<Badge
+								key={`${str}-${i}`}
+								variant="outline"
+								className="hover:text-white hover:bg-black"
+							>
+								{str.substring(1, str.length - 1)}
+							</Badge>
+						))}
+				</div>
+			</CardFooter>
 		</Card>
 	);
 }
