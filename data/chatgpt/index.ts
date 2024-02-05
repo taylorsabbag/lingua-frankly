@@ -20,31 +20,33 @@ export default async function getShortStory(
 		storyPromptOptions;
 	try {
 		const completion = await openai.chat.completions.create({
-			model: "gpt-3.5-turbo",
+			model: "gpt-3.5-turbo-0125",
+			response_format: { type: "json_object" },
+			temperature: 0.9,
+			max_tokens: 800,
 			messages: [
 				{
 					role: "system",
 					content:
-						"You are Frank. You will craft stories in English for the purpose of acquiring a language according to CEFR levels and Stephen Krashen's principles of optimal and comprehensible input. You will avoid somber themes and taboo topics. You are designed for single-prompt interactions, filling in narrative gaps intelligently. You can also provide multiple stories in one session. Your personality is fluid, changing to suit the story being told. If a request lacks specifics, you will adopt a personality fitting the story you choose, ensuring each narrative is engaging, appropriately styled, and follows Stephen Krashen's language acquisition theories for effective, efficient language acquisition.",
+						"You are Frank. You will craft stories in English for the purpose of acquiring a language according to CEFR levels and Stephen Krashen's principles of optimal and comprehensible input. You will avoid somber themes and taboo topics. You are designed for single-prompt interactions, filling in narrative gaps intelligently. You can also provide multiple stories in one session. Your personality is fluid, changing to suit the story being told. If a request lacks specifics, you will adopt a personality fitting the story you choose, ensuring each narrative is engaging, appropriately styled, and follows Stephen Krashen's language acquisition theories for effective, efficient language acquisition. Please provide your response in JSON format. The content of the story should have a key of 'content'. You will also provide a title for each story with a key of 'title'. Finally, you will provide 3 keywords representing the story with a key of 'keywords'.",
 				},
 				{
 					role: "user",
-					content: `Create a single short story in English for a CEFR level ${learnerLevel} learner. Produce a short (10 words or less) title for the short story and present it in the same line as the first paragraph placing a single '>' after the title. Also, provide a set of 3 keywords that represent the story and add them to the end of the final paragraph placing a single '>' between the end of the story and the keywords, which should be separated by ','. Include the following themes, genres, people names, pet names, premise, and setting, respectively: ${genres?.join(
+					content: `Create a single short story in English for a CEFR level ${learnerLevel} learner. Include the following themes, genres, people names, pet names, premise, and setting, respectively: ${genres?.join(
 						", ",
 					)}; ${people?.join(", ")}; ${pets?.join(
 						", ",
-					)}; ${premise}; ${setting}. If any of the preceding options are not provided, you may choose any genres, names, premise, and setting. The short story may not exceed 800 words.`,
+					)}; ${premise}; ${setting}. If any of the preceding options are not provided, you may choose any genres, names, premise, and setting. The short story may not exceed 200 words.`,
 				},
 			],
-			temperature: 0.9,
-			max_tokens: 800,
 		});
 		const story = completion?.choices[0]?.message?.content;
-		const [title, content, keywords] = story.split(">");
+		const jsonStory = JSON.parse(story);
+		const { title, content, keywords } = jsonStory;
 		return {
 			title,
 			content,
-			keywords
+			keywords,
 		};
 	} catch (error) {
 		console.error("Error requesting story from OpenAI:", error);

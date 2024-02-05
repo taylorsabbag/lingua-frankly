@@ -43,13 +43,13 @@ export default async function getTranslation(
 		];
 	try {
 		if (!deepLTargetLangAbbreviation) {
-			throw new Error("Invalid target language");
+			throw new Error(`Invalid target language: ${targetLanguage}`);
 		}
 
 		const response = await fetch(DEEPL_BASE_URL_FREE, {
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `DeepL-Auth-Key ${process.env.NEXT_PUBLIC_DEEPL_API_KEY}`,
+				"Authorization": `DeepL-Auth-Key ${process.env.NEXT_PUBLIC_DEEPL_API_KEY}`,
 			},
 			method: "POST",
 			body: JSON.stringify({

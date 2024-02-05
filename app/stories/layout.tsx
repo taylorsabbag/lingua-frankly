@@ -1,3 +1,6 @@
+import Link from "next/link";
+
+
 export default async function Layout({
     children,
   }: Readonly<{
@@ -6,7 +9,7 @@ export default async function Layout({
     return (
         <main>
           <section className="py-10 px-4">
-            <h1 className="ml-2 mb-4">Stories</h1>
+            <Link href="/stories" className="w-fit block"><h1 className="ml-2 mb-4 w-fit">Stories</h1></Link>
             {children}
           </section>
         </main>

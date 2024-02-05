@@ -61,6 +61,7 @@ export default function Register() {
 		"Persian",
 		"Bulgarian",
 	] as const;
+	const languageLevels = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
 
 	return (
 		<TabsContent value="register">
@@ -160,13 +161,27 @@ export default function Register() {
 							</Select>
 						</div>
 						<div>
-							<Label htmlFor="genres">
-								Genres
+							<Label htmlFor="languageLevel">
+								Language Level <span className="text-red-500">*</span>
 							</Label>
-							
+							<Select required name="languageLevel">
+								<SelectTrigger>
+									<SelectValue placeholder="Select a language level" />
+								</SelectTrigger>
+								<SelectContent>
+									<SelectGroup>
+										<SelectLabel>CEFR Language Levels</SelectLabel>
+										{languageLevels.map((level) => (
+											<SelectItem key={level} value={level}>
+												{level}
+											</SelectItem>
+										))}
+									</SelectGroup>
+								</SelectContent>
+							</Select>
 						</div>
 						<div className="flex items-center space-x-2">
-							<Checkbox name="autoGenerate" id="autoGenerate" />
+							<Checkbox name="autoGenerate" id="autoGenerate" checked={true} />
 							<Label htmlFor="autoGenerate">
 								I want my stories to be automatically generated.
 								<TooltipProvider>

@@ -6,9 +6,10 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 
-export default function Story({ id, content, language, title }) {
+export default function Story({ id, content, language, title, keywords }) {
 	return (
 		<Link href={`/stories/${id}`}>
 			<Card>
@@ -16,12 +17,24 @@ export default function Story({ id, content, language, title }) {
 					<CardTitle>{title}</CardTitle>
 					<CardDescription>{language}</CardDescription>
 				</CardHeader>
-				<CardContent className="line-clamp-3 mb-6">
-					{content}
-				</CardContent>
-				{/* <CardFooter className="pb-0">
-					Keywords: {keywords}
-				</CardFooter> */}
+				<CardContent className="line-clamp-3">{content}</CardContent>
+				<CardFooter className="my-6 pb-0">
+					<div className="text-sm flex gap-2">
+						<span className="italic">Keywords: </span>
+						{keywords
+							.substring(1, keywords.length - 1)
+							.split(",")
+							.map((str: string, i: number) => (
+								<Badge
+									key={`${str}-${i}`}
+									variant="outline"
+									className="hover:text-white hover:bg-black"
+								>
+									{str.substring(1, str.length - 1)}
+								</Badge>
+							))}
+					</div>
+				</CardFooter>
 			</Card>
 		</Link>
 	);

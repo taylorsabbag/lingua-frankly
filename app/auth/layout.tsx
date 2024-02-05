@@ -9,7 +9,7 @@ export default function AuthLayout({
 }) {
 	return (
 		<main>
-			<Tabs defaultValue="login" className="w-[380px] mx-auto">
+			<Tabs defaultValue="login" className="w-[380px] mx-auto mt-10">
 				<TabsList className="w-full flex justify-between">
 					<TabsTrigger className="w-full" value="login">
 						Login
