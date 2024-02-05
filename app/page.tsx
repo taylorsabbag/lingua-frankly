@@ -48,7 +48,7 @@ export default function Home() {
 								<div className="grid grid-cols-2 gap-6">
 									<Card className="col-span-2">
 										<CardHeader className="flex flex-row items-center gap-2">
-											<DownloadIcon className="size-10 align-baseline hidden sm:block" />
+											<DownloadIcon className="size-[1.5em] align-baseline hidden sm:block" />
 											<h4 className="font-medium text-gray-900">
 												Optimal Input
 											</h4>
@@ -62,7 +62,7 @@ export default function Home() {
 									</Card>
 									<Card>
 										<CardHeader className="flex flex-row items-center gap-2">
-											<CopyIcon className="size-10 align-baseline hidden sm:block" />
+											<CopyIcon className="size-[1.5em] align-baseline hidden sm:block" />
 											<h4 className=" font-medium text-gray-900">
 												Acquisition-Learning
 											</h4>
@@ -76,7 +76,7 @@ export default function Home() {
 									</Card>
 									<Card>
 										<CardHeader className="flex flex-row items-center gap-2">
-											<EyeNoneIcon className="size-10 align-baseline hidden sm:block" />
+											<EyeNoneIcon className="size-[1.5em] align-baseline hidden sm:block" />
 											<h4 className="font-medium text-gray-900">Monitor</h4>
 										</CardHeader>
 										<CardContent>
@@ -87,7 +87,7 @@ export default function Home() {
 									</Card>
 									<Card>
 										<CardHeader className="flex flex-row items-center gap-2">
-											<TextAlignBottomIcon className="size-10 align-baseline hidden sm:block" />
+											<TextAlignBottomIcon className="size-[1.5em] align-baseline hidden sm:block" />
 											<h4 className="font-medium text-gray-900">
 												Natural Order
 											</h4>
@@ -100,7 +100,7 @@ export default function Home() {
 									</Card>
 									<Card>
 										<CardHeader className="flex flex-row items-center gap-2">
-											<HeartIcon className="size-10 align-baseline hidden sm:block" />
+											<HeartIcon className="size-[1.5em] align-baseline hidden sm:block" />
 											<h4 className="font-medium text-gray-900">
 												Affective Filter
 											</h4>
