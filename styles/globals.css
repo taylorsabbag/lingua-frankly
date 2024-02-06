@@ -158,3 +158,9 @@ a {
   color: white;
   margin-bottom: 2rem;
 }
+
+.selected {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+}

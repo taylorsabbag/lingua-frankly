@@ -1,5 +1,5 @@
 import StoriesList from "./storyList";
-import { createStory, getAllStoriesByUserId } from "@/data/stories"
+import { getAllStoriesByUserId } from "@/data/stories"
 import { isUserLoggedIn } from "@/app/auth/actions";
 import { redirect } from "next/navigation";
 import { PostgrestError } from "@supabase/supabase-js";

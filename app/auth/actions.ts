@@ -38,15 +38,15 @@ export async function login(formData: FormData) {
 		return;
 	}
 
-	const { error } = await supabase.auth.signInWithPassword(data);
-
-	if (error) {
-    console.error(error)
+	try {
+		const { error } = await supabase.auth.signInWithPassword(data);
+		if (error) throw new Error(error)
+		revalidatePath("/", "layout");
+	} catch (error) {
+		console.error(error);
 		redirect("/error");
 	}
-
-	revalidatePath("/", "layout");
-	redirect("/");
+	redirect("/stories");
 }
 
 export async function logout() {
@@ -95,7 +95,8 @@ export async function signup(formData: FormData) {
 		"Persian",
 		"Bulgarian",
 	] as const;
-
+	console.log(formData)
+	return
   const languageLevels = [
     'A1',
     'A2',
@@ -185,6 +186,7 @@ export async function signup(formData: FormData) {
 		redirect("/error");
 	}
 
+	// TODO: Restructure to redirect to stories and add skeletons and call story functions after
 	revalidatePath("/", "layout");
 	redirect("/");
 }
