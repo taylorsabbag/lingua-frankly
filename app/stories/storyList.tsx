@@ -1,7 +1,7 @@
 import { UUID } from "crypto";
 import Story from "./story";
 
-export default function StoryList({ data }) {
+export default function StoryList({ data }: { data: any }) {
 	return (
 		<section className="flex flex-col gap-6">
 			{data?.map(
