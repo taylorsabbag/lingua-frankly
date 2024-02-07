@@ -203,18 +203,28 @@ export default function Register() {
 								Story Genres (select up to 3)
 							</Label>
 							<div className="flex gap-2 flex-wrap">
-								{genres.map((genre) => (
+								{/* {Array.from(genres).map((genre) => (
 									<label
 										key={genre}
 										htmlFor={genre}
+										tabIndex={0}
 										onClick={(e) => {
-											const checkedGenres =
-												document.getElementsByName("genres");
-											const numberOfCheckedGenres = [...checkedGenres].filter(
-												(item) => item.checked === true,
+											const checkedGenres = document.getElementsByName("genres");
+											const numberOfCheckedGenres = Array.from(checkedGenres).filter(
+												(item) => item.checked === true
 											).length;
 											console.log(numberOfCheckedGenres);
 											console.log(e);
+										}}
+										onKeyUp={(e) => {
+											if (e.key === "Enter") {
+												const checkedGenres = document.getElementsByName("genres");
+												const numberOfCheckedGenres = Array.from(checkedGenres).filter(
+													(item: HTMLInputElement) => item.checked === true
+												).length;
+												console.log(numberOfCheckedGenres);
+												console.log(e);
+											}
 										}}
 									>
 										<input
@@ -226,7 +236,7 @@ export default function Register() {
 										/>
 										<Badge id={`${genre}Badge`}>{genre}</Badge>
 									</label>
-								))}
+								))} */}
 							</div>
 						</div>
 						<div className="flex items-center space-x-2">
@@ -234,12 +244,10 @@ export default function Register() {
 							<Label htmlFor="autoGenerate">
 								I want my stories to be automatically generated.
 								<TooltipProvider>
-									<Tooltip className="self-end">
+									<Tooltip>
 										<TooltipContent>
 											<p className="text-xs">
-												If this is checked, your stories will be automatically
-												generated. This can be changed later in your profile
-												settings.
+												If this is checked, your stories will be automatically generated. This can be changed later in your profile settings.
 											</p>
 										</TooltipContent>
 										<TooltipTrigger>
