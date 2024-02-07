@@ -1,13 +1,10 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { signup } from "../actions";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipProvider,
-	TooltipTrigger,
-} from "@/components/ui/tooltip";
 import {
 	Card,
 	CardContent,
@@ -17,7 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { TabsContent } from "@/components/ui/tabs";
+import { Label } from "@/components/ui/label";
 import {
 	Select,
 	SelectContent,
@@ -27,7 +24,13 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
+import { TabsContent } from "@/components/ui/tabs";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function Register() {
 	const languages = [
@@ -62,6 +65,21 @@ export default function Register() {
 		"Bulgarian",
 	] as const;
 	const languageLevels = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
+
+	const genres = [
+		"Action",
+		"Adventure",
+		"Comedy",
+		"Crime",
+		"Drama",
+		"Fantasy",
+		"Horror",
+		"Mystery",
+		"Romance",
+		"Science Fiction",
+		"Thriller",
+		"Western",
+	] as const;
 
 	return (
 		<TabsContent value="register">
@@ -179,6 +197,37 @@ export default function Register() {
 									</SelectGroup>
 								</SelectContent>
 							</Select>
+						</div>
+						<div>
+							<Label className="block mb-2">
+								Story Genres (select up to 3)
+							</Label>
+							<div className="flex gap-2 flex-wrap">
+								{genres.map((genre) => (
+									<label
+										key={genre}
+										htmlFor={genre}
+										onClick={(e) => {
+											const checkedGenres =
+												document.getElementsByName("genres");
+											const numberOfCheckedGenres = [...checkedGenres].filter(
+												(item) => item.checked === true,
+											).length;
+											console.log(numberOfCheckedGenres);
+											console.log(e);
+										}}
+									>
+										<input
+											id={genre}
+											type="checkbox"
+											name="genres"
+											value={genre}
+											hidden
+										/>
+										<Badge id={`${genre}Badge`}>{genre}</Badge>
+									</label>
+								))}
+							</div>
 						</div>
 						<div className="flex items-center space-x-2">
 							<Checkbox name="autoGenerate" id="autoGenerate" checked={true} />

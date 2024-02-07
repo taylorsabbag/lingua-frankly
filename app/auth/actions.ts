@@ -1,13 +1,13 @@
 "use server";
 
-import { z } from "zod";
+import { createStory } from "@/data/stories/index.ts";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { createStory } from "@/data/stories/index.ts"
+import { z } from "zod";
 
-import { createClient } from "@/utils/supabase/actions";
 import { UUID } from "crypto";
+import { createClient } from "@/utils/supabase/actions";
 
 export async function isUserLoggedIn() {
 	const cookieStore = cookies();
@@ -40,7 +40,7 @@ export async function login(formData: FormData) {
 
 	try {
 		const { error } = await supabase.auth.signInWithPassword(data);
-		if (error) throw new Error(error)
+		if (error) throw new Error(error);
 		revalidatePath("/", "layout");
 	} catch (error) {
 		console.error(error);
@@ -53,9 +53,9 @@ export async function logout() {
 	const cookieStore = cookies();
 	const supabase = createClient(cookieStore);
 	const { error } = await supabase.auth.signOut();
-	
+
 	if (error) {
-    console.error(error);
+		console.error(error);
 		redirect("/error");
 	}
 
@@ -95,17 +95,9 @@ export async function signup(formData: FormData) {
 		"Persian",
 		"Bulgarian",
 	] as const;
-	console.log(formData)
-	return
-  const languageLevels = [
-    'A1',
-    'A2',
-    'B1',
-    'B2',
-    'C1',
-    'C2',
-  ] as const;
-  const languageLevelSchema = z.enum([...languageLevels])
+
+	const languageLevels = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
+	const languageLevelSchema = z.enum([...languageLevels]);
 
 	const languageSchema = z.enum([...languages]);
 	const formDataSchema = z
@@ -117,7 +109,7 @@ export async function signup(formData: FormData) {
 			lastName: z.string().max(30),
 			baseLanguage: languageSchema,
 			targetLanguage: languageSchema,
-      languageLevel: languageLevelSchema,
+			languageLevel: languageLevelSchema,
 		})
 		.refine((data) => data.password === data.confirmPassword, {
 			message: "Please provide matching passwords.",
@@ -134,7 +126,7 @@ export async function signup(formData: FormData) {
 		lastName: formData.get("lastName") as string,
 		baseLanguage: formData.get("baseLanguage") as string,
 		targetLanguage: formData.get("targetLanguage") as string,
-    languageLevel: formData.get("languageLevel") as string,
+		languageLevel: formData.get("languageLevel") as string,
 	};
 
 	const result = formDataSchema.safeParse(extractedFormData);
@@ -143,8 +135,10 @@ export async function signup(formData: FormData) {
 		return;
 	}
 
-	const { data: userData, error: userError } =
-		await supabase.auth.signUp({email: extractedFormData.email, password: extractedFormData.password});
+	const { data: userData, error: userError } = await supabase.auth.signUp({
+		email: extractedFormData.email,
+		password: extractedFormData.password,
+	});
 	const { error: profileError } = await supabase
 		.from("profiles")
 		.update({
@@ -153,36 +147,54 @@ export async function signup(formData: FormData) {
 			last_name: extractedFormData.lastName,
 			base_language: extractedFormData.baseLanguage,
 			target_language: extractedFormData.targetLanguage,
-      language_level: extractedFormData.languageLevel
-		}).eq('id', userData?.user?.id)
+			language_level: extractedFormData.languageLevel,
+		})
+		.eq("id", userData?.user?.id);
 
-  const newUserStories = await Promise.all([
-    createStory({ language: extractedFormData.targetLanguage, userId: userData?.user?.id as UUID, storyPromptOptions: {
-      learnerLevel: extractedFormData.languageLevel as typeof languageLevels[number],
-      genres: ['Adventure'],
-      people: ['Abigail', "John"],
-      pets: ['Theo', 'Kaileigh'],
-      premise: 'A trip to the park',
-      setting: 'A park in the Netherlands',
-    }}),
-    createStory({ language: extractedFormData.targetLanguage, userId: userData?.user?.id as UUID, storyPromptOptions: {
-      learnerLevel: extractedFormData.languageLevel as typeof languageLevels[number],
-      genres: ['Romance'],
-      people: ['Becca', 'Taylor'],
-      premise: 'A first date at a bar with a golf simulator',
-      setting: 'A golf-themed bar'
-    }}),
-    createStory({language: extractedFormData.targetLanguage, userId: userData?.user?.id as UUID, storyPromptOptions: {
-      learnerLevel: extractedFormData.languageLevel as typeof languageLevels[number],
-      genres: ['Mystery'],
-      people: ['Detective Smith', 'Suspect'],
-      premise: 'A murder was committed at Saltburn Manor.',
-      setting: 'The stately Saltburn Manor in England'
-    }})
-  ])
+	const newUserStories = await Promise.all([
+		createStory({
+			language: extractedFormData.targetLanguage,
+			userId: userData?.user?.id as UUID,
+			storyPromptOptions: {
+				learnerLevel:
+					extractedFormData.languageLevel as (typeof languageLevels)[number],
+				genres: ["Adventure"],
+				people: ["Abigail", "John"],
+				pets: ["Theo", "Kaileigh"],
+				premise: "A trip to the park",
+				setting: "A park in the Netherlands",
+			},
+		}),
+		createStory({
+			language: extractedFormData.targetLanguage,
+			userId: userData?.user?.id as UUID,
+			storyPromptOptions: {
+				learnerLevel:
+					extractedFormData.languageLevel as (typeof languageLevels)[number],
+				genres: ["Romance"],
+				people: ["Becca", "Taylor"],
+				premise: "A first date at a bar with a golf simulator",
+				setting: "A golf-themed bar",
+			},
+		}),
+		createStory({
+			language: extractedFormData.targetLanguage,
+			userId: userData?.user?.id as UUID,
+			storyPromptOptions: {
+				learnerLevel:
+					extractedFormData.languageLevel as (typeof languageLevels)[number],
+				genres: ["Mystery"],
+				people: ["Detective Smith", "Suspect"],
+				premise: "A murder was committed at Saltburn Manor.",
+				setting: "The stately Saltburn Manor in England",
+			},
+		}),
+	]);
 
 	if (userError || profileError) {
-    console.error(userError ? `User error: ${userError}` : `Profile error: ${profileError}`)
+		console.error(
+			userError ? `User error: ${userError}` : `Profile error: ${profileError}`,
+		);
 		redirect("/error");
 	}
 

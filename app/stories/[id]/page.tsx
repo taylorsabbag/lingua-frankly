@@ -1,4 +1,5 @@
-import { getStoryById } from "@/data/stories";
+import { isUserLoggedIn } from "@/app/auth/actions";
+import { Badge, badgeVariants } from "@/components/ui/badge";
 import {
 	Card,
 	CardContent,
@@ -7,9 +8,8 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { Badge, badgeVariants } from "@/components/ui/badge";
+import { getStoryById } from "@/data/stories";
 import { redirect } from "next/navigation";
-import { isUserLoggedIn } from "@/app/auth/actions";
 
 export default async function StoryPage({
 	params,
@@ -27,7 +27,9 @@ export default async function StoryPage({
 				<CardTitle>{story.title}</CardTitle>
 				<CardDescription>{story.language}</CardDescription>
 			</CardHeader>
-			<CardContent><p>{story.content}</p></CardContent>
+			<CardContent>
+				<p>{story.content}</p>
+			</CardContent>
 			<CardFooter>
 				<div className="text-sm flex gap-2 flex-wrap flex-col sm:flex-row items-start">
 					<span className="italic">Keywords: </span>

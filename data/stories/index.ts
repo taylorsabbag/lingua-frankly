@@ -1,10 +1,10 @@
 "use server";
 
-import { createClient } from "@/utils/supabase/actions";
-import { cookies } from "next/headers";
 import { UUID } from "crypto";
 import getShortStory, { StoryPromptOptions } from "@/data/chatgpt";
 import getTranslation from "@/data/deepL";
+import { createClient } from "@/utils/supabase/actions";
+import { cookies } from "next/headers";
 
 export type StoryRequest = {
 	language: string;

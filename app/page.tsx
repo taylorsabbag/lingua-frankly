@@ -1,18 +1,18 @@
 import { buttonVariants } from "@/components/ui/button";
-import Link from "next/link";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
-	DownloadIcon,
 	CopyIcon,
+	DownloadIcon,
 	EyeNoneIcon,
-	TextAlignBottomIcon,
 	HeartIcon,
+	TextAlignBottomIcon,
 } from "@radix-ui/react-icons";
 import Image from "next/image";
+import Link from "next/link";
 
+import openAIIcon from "@/assets/openai-logomark.svg";
 import supabaseIcon from "@/assets/supabase-logo-icon.png";
 import tailwindIcon from "@/assets/tailwindcss-icon.svg";
-import openAIIcon from "@/assets/openai-logomark.svg";
 
 export default function Home() {
 	return (
@@ -36,9 +36,9 @@ export default function Home() {
 					<div className="container px-4 mx-auto sm:px-6 lg:px-8">
 						<div className="lg:grid lg:grid-cols-3 lg:gap-8">
 							<div>
-								<h2 className="font-extrabold">Stephen Krashen{'\''}s Theory</h2>
+								<h2 className="font-extrabold">Stephen Krashen{"'"}s Theory</h2>
 								<p className="mt-4 text-lg text-gray-500">
-									Stephen Krashen{'\''}s theory of second language acquisition
+									Stephen Krashen{"'"}s theory of second language acquisition
 									consists of five main hypotheses. Our app is designed around
 									these principles to provide the most effective language
 									learning experience.
@@ -122,7 +122,7 @@ export default function Home() {
 							Example Short Story
 						</h2>
 						<p className="mt-4 text-lg text-gray-500">
-							Here{'\''}s an example of a short story translated into a target
+							Here{"'"}s an example of a short story translated into a target
 							language. Our app provides thousands of such stories to help you
 							immerse yourself in the language.
 						</p>
@@ -153,7 +153,7 @@ export default function Home() {
 						</h2>
 						<p className="mt-4 text-lg text-gray-500">
 							Our app is designed to provide you with the optimal input you need
-							to acquire a new language. Here{'\''}s how it works:
+							to acquire a new language. Here{"'"}s how it works:
 						</p>
 						<div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
 							<div>

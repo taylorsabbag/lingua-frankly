@@ -1,14 +1,14 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { logout } from "@/app/auth/actions";
-import Image from "next/image";
+import { isUserLoggedIn } from "@/app/auth/actions";
 import logo from "@/assets/LinguaFrankly_icon.png";
-import { isUserLoggedIn } from '@/app/auth/actions'
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
 
 export default async function Header() {
-	const user = await isUserLoggedIn()
+	const user = await isUserLoggedIn();
 
 	return (
 		<header className="flex w-full justify-around sm:justify-between items-center py-6 px-4 bg-foreground text-white">
@@ -17,7 +17,6 @@ export default async function Header() {
 				<h4 className="hidden sm:block">LinguaFrankly</h4>
 			</Link>
 			<div className="flex items-center gap-6">
-
 				{user && (
 					<>
 						<Link href="/stories" className="text-sm">
@@ -27,7 +26,12 @@ export default async function Header() {
 							Profile
 						</Link>
 						<form action={logout}>
-							<Button className={buttonVariants({ variant: "destructive" })} type="submit">Log Out</Button>
+							<Button
+								className={buttonVariants({ variant: "destructive" })}
+								type="submit"
+							>
+								Log Out
+							</Button>
 						</form>
 					</>
 				)}
