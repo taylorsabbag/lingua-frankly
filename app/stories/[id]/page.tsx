@@ -9,12 +9,13 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { getStoryById } from "@/data/stories";
+import { PostgrestError } from "@supabase/supabase-js";
 import { redirect } from "next/navigation";
 
 export default async function StoryPage({
 	params,
 }: { params: { id: string } }) {
-	const { data: story, error } = await getStoryById(params.id);
+	const { data: story, error } = await getStoryById(params.id) as { data: any; error: PostgrestError | null };
 	const user = await isUserLoggedIn();
 	const userId = user?.identities?.[0]?.id ?? null;
 	if (userId !== story.user_id) {
