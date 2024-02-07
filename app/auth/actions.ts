@@ -1,6 +1,6 @@
 "use server";
 
-import { createStory } from "@/data/stories/index.ts";
+import { createStory } from "@/data/stories/index";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -40,7 +40,7 @@ export async function login(formData: FormData) {
 
 	try {
 		const { error } = await supabase.auth.signInWithPassword(data);
-		if (error) throw new Error(error);
+		if (error) throw new Error(error.message);
 		revalidatePath("/", "layout");
 	} catch (error) {
 		console.error(error);
