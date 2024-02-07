@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 
-export default function Story({ id, content, language, title, keywords }) {
+export default function Story({ id, content, language, title, keywords }: { id: string, content: string, language: string, title: string, keywords: string }) {
 	return (
 		<Link href={`/stories/${id}`}>
 			<Card className="max-w-[70ch]">

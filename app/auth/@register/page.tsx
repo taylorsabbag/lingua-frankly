@@ -247,7 +247,9 @@ export default function Register() {
 									<Tooltip>
 										<TooltipContent>
 											<p className="text-xs">
-												If this is checked, your stories will be automatically generated. This can be changed later in your profile settings.
+												If this is checked, your stories will be automatically
+												generated. This can be changed later in your profile
+												settings.
 											</p>
 										</TooltipContent>
 										<TooltipTrigger>
