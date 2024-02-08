@@ -79,7 +79,7 @@ export default function Register() {
 		"Science Fiction",
 		"Thriller",
 		"Western",
-	] as const;
+	]
 
 	return (
 		<TabsContent value="register">

@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { useState } from "react";
+import { KeyboardEvent, MouseEvent, useState } from "react";
 
 // This component creates, in effect, a select input that can accept multiple values. It uses the Badge component to display the options, and checkboxes to handle the selection of the options.
 // If fewer options are selected than the maxSelectable prop, then the checkbox is toggled, its inclusion in the selected array is toggled, and the accompanying badge's style is toggled.
@@ -10,32 +10,50 @@ export default function BadgeMultiSelect({
 	options,
 	name,
 	maxSelectable,
-}: { options: any[]; name: string; maxSelectable: number }) {
-	const [selected, setSelected] = useState([]);
+}: { options: string[]; name: string; maxSelectable: number }) {
+	const [selected, setSelected] = useState<string[]>([]);
 	const selectedCount = selected.length;
 
-	function handleSelect(event) {
-        if (selectedCount < maxSelectable) {
-            if (event.target.matches("[data-checkbox]")) {
-                if (selected.includes(event.target.value)) {
-                    setSelected(selected.filter((item) => item !== event.target.value));
-                } else {
-                    setSelected((prev) => [...prev, event.target.value]);
-                }
-            }
+	function handleSelect(
+		event:
+			| MouseEvent<HTMLLabelElement>
+			| KeyboardEvent<HTMLLabelElement>
+			| KeyboardEvent<HTMLDivElement>
+			| MouseEvent<HTMLDivElement>
+			| MouseEvent<HTMLInputElement>
+			| KeyboardEvent<HTMLInputElement>,
+	) {
+		if (selectedCount < maxSelectable) {
+			if ((event.target as Element).matches("[data-checkbox]")) {
+				if (selected.includes((event.target as HTMLInputElement).value)) {
+					setSelected(
+						selected.filter(
+							(item) => item !== (event.target as HTMLInputElement).value,
+						),
+					);
+				} else {
+					setSelected((prev) => [
+						...prev,
+						(event.target as HTMLInputElement).value,
+					]);
+				}
+			}
+		} else {
+			if ((event.target as HTMLElement).matches("[data-badge]")) {
+				(event.target as HTMLElement).classList.toggle("selected");
+			}
+			if ((event.target as HTMLElement).matches("[data-checkbox")) {
+				(event.target as HTMLInputElement).checked = false;
 
-            if (event.target.matches("[data-badge]")) {
-                event.target.classList.toggle("selected");
-            }
-        } else {
-            if (event.target.matches("[data-checkbox")) {
-                event.target.checked = false
-                
-                if (selected.includes(event.target.value)) {
-                    setSelected(selected.filter((item) => item !== event.target.value))
-                }
-            }
-        }
+				if (selected.includes((event.target as HTMLInputElement).value)) {
+					setSelected(
+						selected.filter(
+							(item) => item !== (event.target as HTMLInputElement).value,
+						),
+					);
+				}
+			}
+		}
 	}
 
 	return (
@@ -45,14 +63,8 @@ export default function BadgeMultiSelect({
 					key={option}
 					htmlFor={option}
 					tabIndex={0}
-					onClick={(e) => {
-						handleSelect(e);
-						console.log(selected);
-					}}
-					onKeyUp={(e) => {
-						handleSelect(e);
-						console.log(selected);
-					}}
+					onClick={handleSelect}
+					onKeyUp={handleSelect}
 				>
 					<input
 						id={option}
@@ -62,9 +74,7 @@ export default function BadgeMultiSelect({
 						hidden
 						data-checkbox={true}
 					/>
-					<Badge data-badge={true}>
-						{option}
-					</Badge>
+					<Badge data-badge={true}>{option}</Badge>
 				</label>
 			))}
 		</>

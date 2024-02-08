@@ -48,7 +48,11 @@ async function createStory(storyRequest: StoryRequest) {
 	const { language, userId, storyPromptOptions }: StoryRequest = storyRequest;
 	try {
 		const { title, content, keywords } =
-			await getShortStory(storyPromptOptions);
+			(await getShortStory(storyPromptOptions)) as {
+				title: string;
+				content: string;
+				keywords: string;
+			};
 		const translatedStory = await getTranslation(content, language);
 		const translatedTitle = await getTranslation(title, language);
 

@@ -115,7 +115,7 @@ export async function signup(formData: FormData) {
 		"Thriller",
 		"Western",
 	] as const;
-	const genreSchema = z.string(z.union([...genres].map((genre) => z.literal(genre))));
+	const genreSchema = z.enum([...genres]);
 
 	const formDataSchema = z
 		.object({

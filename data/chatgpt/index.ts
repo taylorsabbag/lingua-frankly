@@ -41,7 +41,7 @@ export default async function getShortStory(
 			],
 		});
 		const story = completion?.choices[0]?.message?.content;
-		const jsonStory = JSON.parse(story);
+		const jsonStory = JSON.parse(story as string);
 		const { title, content, keywords } = jsonStory;
 		return {
 			title,
