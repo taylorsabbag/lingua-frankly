@@ -122,7 +122,7 @@ npm start
 _Note on API References:_ There are no REST or GraphQL endpoints. All data fetching and mutations are handled via internal server components and server actions. As such, the following are merely references to the functions created for accessing and mutating data.
 
 - Supabase
-  - In the latest version of Supabase's SDK, it is recommended to use their new s
+  - In the latest version of Supabase's SDK, it is recommended to use their new @supabase/ssr package for optimal integration with all SSR-capable frameworks.
 
 ## Screenshots
 
