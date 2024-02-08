@@ -95,11 +95,28 @@ export async function signup(formData: FormData) {
 		"Persian",
 		"Bulgarian",
 	] as const;
+	const languageSchema = z.enum([...languages]);
 
 	const languageLevels = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
 	const languageLevelSchema = z.enum([...languageLevels]);
 
-	const languageSchema = z.enum([...languages]);
+	
+	const genres = [
+		"Action",
+		"Adventure",
+		"Comedy",
+		"Crime",
+		"Drama",
+		"Fantasy",
+		"Horror",
+		"Mystery",
+		"Romance",
+		"Science Fiction",
+		"Thriller",
+		"Western",
+	] as const;
+	const genreSchema = z.string(z.union([...genres].map((genre) => z.literal(genre))));
+
 	const formDataSchema = z
 		.object({
 			email: z.string().email().min(6).max(40),
@@ -110,6 +127,9 @@ export async function signup(formData: FormData) {
 			baseLanguage: languageSchema,
 			targetLanguage: languageSchema,
 			languageLevel: languageLevelSchema,
+			genres: genreSchema,
+			peopleNames: z.string(),
+			petNames: z.string(),
 		})
 		.refine((data) => data.password === data.confirmPassword, {
 			message: "Please provide matching passwords.",
@@ -127,6 +147,9 @@ export async function signup(formData: FormData) {
 		baseLanguage: formData.get("baseLanguage") as string,
 		targetLanguage: formData.get("targetLanguage") as string,
 		languageLevel: formData.get("languageLevel") as string,
+		genres: formData.getAll("genres").join(', ') as string,
+		peopleNames: formData.get('peopleNames') as string,
+		petNames: formData.get('petNames') as string,
 	};
 
 	const result = formDataSchema.safeParse(extractedFormData);
@@ -151,44 +174,22 @@ export async function signup(formData: FormData) {
 		})
 		.eq("id", userData?.user?.id);
 
-	const newUserStories = await Promise.all([
-		createStory({
-			language: extractedFormData.targetLanguage,
-			userId: userData?.user?.id as UUID,
-			storyPromptOptions: {
-				learnerLevel:
-					extractedFormData.languageLevel as (typeof languageLevels)[number],
-				genres: ["Adventure"],
-				people: ["Abigail", "John"],
-				pets: ["Theo", "Kaileigh"],
-				premise: "A trip to the park",
-				setting: "A park in the Netherlands",
-			},
-		}),
-		createStory({
-			language: extractedFormData.targetLanguage,
-			userId: userData?.user?.id as UUID,
-			storyPromptOptions: {
-				learnerLevel:
-					extractedFormData.languageLevel as (typeof languageLevels)[number],
-				genres: ["Romance"],
-				people: ["Becca", "Taylor"],
-				premise: "A first date at a bar with a golf simulator",
-				setting: "A golf-themed bar",
-			},
-		}),
-		createStory({
-			language: extractedFormData.targetLanguage,
-			userId: userData?.user?.id as UUID,
-			storyPromptOptions: {
-				learnerLevel:
-					extractedFormData.languageLevel as (typeof languageLevels)[number],
-				genres: ["Mystery"],
-				people: ["Detective Smith", "Suspect"],
-				premise: "A murder was committed at Saltburn Manor.",
-				setting: "The stately Saltburn Manor in England",
-			},
-		}),
+	await Promise.all([
+		Array(3).fill(0).map((_) => (
+			createStory({
+				language: extractedFormData.targetLanguage,
+				userId: userData?.user?.id as UUID,
+				storyPromptOptions: {
+					learnerLevel:
+						extractedFormData.languageLevel as (typeof languageLevels)[number],
+					genres: extractedFormData.genres.split(","),
+					people: extractedFormData.peopleNames.split(","),
+					pets: extractedFormData.petNames.split(","),
+					premise: undefined,
+					setting: undefined,
+				},
+			})
+		))
 	]);
 
 	if (userError || profileError) {

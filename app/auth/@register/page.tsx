@@ -3,7 +3,6 @@
 import { cn } from "@/lib/utils";
 import { signup } from "../actions";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -31,6 +30,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import BadgeMultiSelect from "@/components/BadgeMultiSelect";
 
 export default function Register() {
 	const languages = [
@@ -203,41 +203,22 @@ export default function Register() {
 								Story Genres (select up to 3)
 							</Label>
 							<div className="flex gap-2 flex-wrap">
-								{/* {Array.from(genres).map((genre) => (
-									<label
-										key={genre}
-										htmlFor={genre}
-										tabIndex={0}
-										onClick={(e) => {
-											const checkedGenres = document.getElementsByName("genres");
-											const numberOfCheckedGenres = Array.from(checkedGenres).filter(
-												(item) => item.checked === true
-											).length;
-											console.log(numberOfCheckedGenres);
-											console.log(e);
-										}}
-										onKeyUp={(e) => {
-											if (e.key === "Enter") {
-												const checkedGenres = document.getElementsByName("genres");
-												const numberOfCheckedGenres = Array.from(checkedGenres).filter(
-													(item: HTMLInputElement) => item.checked === true
-												).length;
-												console.log(numberOfCheckedGenres);
-												console.log(e);
-											}
-										}}
-									>
-										<input
-											id={genre}
-											type="checkbox"
-											name="genres"
-											value={genre}
-											hidden
-										/>
-										<Badge id={`${genre}Badge`}>{genre}</Badge>
-									</label>
-								))} */}
+								<BadgeMultiSelect options={genres} name={"genres"} maxSelectable={3} />
 							</div>
+						</div>
+						<div>
+							<Label htmlFor="peopleNames">
+								People Names to Include in Stories
+							</Label>
+							<Input type='text' name="peopleNames" placeholder="John, Jane, etc." />
+							<p className="text-xs mt-1 ml-1">Note: Names must be comma-separated.</p>
+						</div>
+						<div>
+							<Label htmlFor="petNames">
+								Pet Names to Include in Stories
+							</Label>
+							<Input type='text' name="petNames" placeholder="Spot, Max, etc." />
+							<p className="text-xs mt-1 ml-1">Note: Names must be comma-separated.</p>
 						</div>
 						<div className="flex items-center space-x-2">
 							<Checkbox name="autoGenerate" id="autoGenerate" checked={true} />
@@ -253,7 +234,7 @@ export default function Register() {
 											</p>
 										</TooltipContent>
 										<TooltipTrigger>
-											<Label className="border rounded-full bg-blue-950 text-white shadow-sm">
+											<Label className="rounded-full bg-blue-950 text-white shadow-sm">
 												?
 											</Label>
 										</TooltipTrigger>

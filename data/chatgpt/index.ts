@@ -36,7 +36,7 @@ export default async function getShortStory(
 						", ",
 					)}; ${people?.join(", ")}; ${pets?.join(
 						", ",
-					)}; ${premise}; ${setting}. If any of the preceding options are not provided, you may choose any genres, names, premise, and setting. The short story may not exceed 200 words.`,
+					)}; ${premise}; ${setting}. If any of the preceding options are not provided, you may choose any genres, names, premise, and setting. The short story may not exceed 500 words.`,
 				},
 			],
 		});
