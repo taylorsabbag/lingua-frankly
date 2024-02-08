@@ -1,6 +1,6 @@
 # LinguaFrankly
 
-![](lingua_frank.png)
+![](/assets/lingua_frank.png)
 *Meet Frank - Frank Ontmoeten - לפגוש את פרנק - 
 프랭크를 만나보세요 - 
 Rencontrez Frank*
@@ -72,10 +72,12 @@ Forget about learning. Acquire languages like children do by taking in the world
 - Shadcn/UI for rapid development using headless, yet robustly built and typesafe components.
 
 <div>
-  <img src="./react.png" style="width: 100px;" />
-  <img src="./shadcn.png" style="width: 100px;" />
-  <img src="./supabase.png" style="width: 100px;" />
-  <img src="./tailwind.png" style="width: 100px;" />
+  <img src="/assets/react.png" style="width: 100px;" />
+  <img src="/assets/shadcn.png" style="width: 100px;" />
+  <img src="/assets/supabase.png" style="width: 100px;" />
+  <img src="/assets/tailwind.png" style="width: 100px;" />
+  <img src="/assets/ts-logo-128.png" style="width: 100px;" />
+  <img src="/assets/nextjs.png" style="width: 100px;" />
 </div>
 
 ### External APIs
@@ -84,9 +86,11 @@ Forget about learning. Acquire languages like children do by taking in the world
 - DeepL's API is utilized for translating the story created into any of its included languages.
   - While OpenAI's models are capable of speaking several languages at the moment, by their and OpenAI's own admission, they do not reach fluency levels of C1 or above in any language consistently other than English.
   - Thus, for now and the foreseeable future given DeepL's specialized machine-learning models for translations, it is recommended, and herein used, to translate responses from OpenAI's models into other languages if integrity of the original messages are to be preserved.
- 
-<img src="./chatgpt.png" style="width: 100px;">
-<img src="./deepl.png" style="width: 100px;">
+
+<div>
+  <img src="/assets/chatgpt.png" style="width: 100px;">
+  <img src="/assets/deepl.png" style="width: 100px;">
+</div>
 
 _Special Note on Translation Limitations:_ As the original prompt is produced only in English and then translated into other languages, certain idioms, phrases, and words which only exist in other languages are not created and thus will and can never be translated. In other words, while syntactical meaning between languages can be maintained, the ways that people speak in other languages can not be emulated. DeepL is a translator, not an interpreter. Translators simply maintain syntactical meaning as best they can, whilst interpreters can transform the contextual meaning of an idea into another language without worrying about precise 1-to-1 syntactical translation. For example, Koreans use multiple forms of verb conjugation depending on the context of the individuals they're speaking with, but English has no such differences in syntax. Thus, an English phrase translated into Korean will not contain the context needed to translate into the proper forms. DeepL allows for some context to be provided, but its' abilities are limited.
 
