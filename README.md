@@ -10,17 +10,17 @@ Rencontrez Frank*
 - [Overview](#overview)
   - [Problem](#problem)
   - [Features](#features)
+  - [Usage](#usage)
 - [Implementation](#implementation)
   - [Tech Stack](#tech-stack)
-    - [Limitations and Concerns](#limitations-and-concerns)
-  - [APIs](#apis)
-  - [Sitemap](#sitemap)
-  - [Mockups](#mockups)
-  - [Data](#data)
-  - [Endpoints](#endpoints)
-  - [Auth](#auth)
-- [Roadmap](#roadmap)
-- [Nice-to-haves](#nice-to-haves)
+  - [External APIs](#external-apis)
+- [Installation](#installation)
+  - [Developer Environment](#developer-environment)
+  - [Production Environment](#production-environment)
+  - [API References](#api-references)
+- [Screenshots](#screenshots)
+- [Lessons Learned](#lessons-learned)
+- [Next Steps](#next-steps)
 
 ## Overview
 
@@ -91,10 +91,11 @@ Forget about learning. Acquire languages like children do by taking in the world
   <img src="/assets/chatgpt.png" style="width: 100px;">
   <img src="/assets/deepl.png" style="width: 100px;">
 </div>
+<hr>
 
 _Special Note on Translation Limitations:_ As the original prompt is produced only in English and then translated into other languages, certain idioms, phrases, and words which only exist in other languages are not created and thus will and can never be translated. In other words, while syntactical meaning between languages can be maintained, the ways that people speak in other languages can not be emulated. DeepL is a translator, not an interpreter. Translators simply maintain syntactical meaning as best they can, whilst interpreters can transform the contextual meaning of an idea into another language without worrying about precise 1-to-1 syntactical translation. For example, Koreans use multiple forms of verb conjugation depending on the context of the individuals they're speaking with, but English has no such differences in syntax. Thus, an English phrase translated into Korean will not contain the context needed to translate into the proper forms. DeepL allows for some context to be provided, but its' abilities are limited.
 
-## Usage and Installation
+## Installation
 
 ### Developer Environment
 
