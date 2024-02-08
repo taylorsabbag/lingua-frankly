@@ -255,6 +255,20 @@ export default function Home() {
 						</div>
 					</div>
 				</section>
+				<section className="bg-white">
+					<div className="container px-4 py-10 mx-auto sm:px-6 lg:px-8">
+						<h2 className="text-3xl font-extrabold text-gray-900">
+							Add Me on LinkedIn
+						</h2>
+						<a
+							href="https://www.linkedin.com/in/taylor-sabbag/"
+							className="cursor-default border-none"
+							rel="nofollow"
+						>
+							<img className="w-[80%]" src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fwww.linkedin.com%2Fin%2Ftaylor-sabbag%2F&chs=180x180&choe=UTF-8&chld=L|2" alt=""/>
+						</a>
+					</div>
+				</section>
 			</div>
 		</main>
 	);
